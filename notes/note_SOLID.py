@@ -1,23 +1,32 @@
 import datetime
 import os.path
 import pickle
+from abc import ABC, abstractmethod
 
+class AbstractNote(ABC):
 
-# Клас, який представляє одну нотатку.
-class Note:
-
-    # Конструктор класу, який приймає текст нотатки та список ключових слів.
     def __init__(self, text='', keywords=None):
-        self.text = text  # Текст нотатки.
-        self.keywords = keywords  # Список ключових слів.
-        self.date = datetime.date.today()  # Дата створення нотатки.
+        self.text = text
+        self.keywords = keywords
+        self.date = datetime.date.today()
 
-    # Метод, який повертає рядкове представлення нотатки.
+    @abstractmethod
+    def get_text(self):
+        pass
+
+    @abstractmethod
+    def get_keywords(self):
+        pass
+
+class Note(AbstractNote):
     def __str__(self):
+        return f"Text: {self.text}\nKeywords: {', '.join(self.keywords)}\nDate: {self.date}"
 
-        return (f"Text: {self.text}\n"
-                f"Keywords: {', '.join(self.keywords)}\n"
-                f"Date: {self.date}")
+    def get_text(self):
+        return self.text
+
+    def get_keywords(self):
+        return self.keywords
 
 
 # Клас, який представляє записник з нотатками.
@@ -28,35 +37,22 @@ class Notebook:
         self.notes = []  # Список нотаток.
 
     # Метод, який додає нову нотатку до нотатника.
-    def add_note(self, text='', keywords=None):
-
-        # Створюємо екземпляр класу Note з заданим текстом та ключовими словами.
-        if keywords:
-
-            note = Note(text, keywords)
-            self.notes.append(note)  # Додаємо запис до списку.
-
-        else:
-
-            # Створюємо екземпляр класу Note з заданим текстом без ключових слів.
-            words = text.split(" ")
-            note = Note(text, words[0])
-            self.notes.append(note)
+    def add_note(self, note):
+        self.notes.append(note)  # Додаємо нову нотатку до списку.
 
     # Метод, який редагує існуючу нотатку за її індексом у списку.
     def edit_note(self, index, text=None, keywords=None):
 
         # Перевіряємо, чи є такий індекс у списку нотаток.
         if 0 <= index < len(self.notes):
-
+            note = self.notes[index]
             if text:  # Якщо заданий новий текст, то змінюємо текст нотатки.
-                self.notes[index].text = text
+                note.text = text
 
             if keywords:  # Якщо заданий новий список ключових слів, то змінюємо ключові слова нотатки.
-                self.notes[index].keywords = keywords
+                note.keywords = keywords
 
         else:
-            # Якщо такого індексу немає, то виводимо повідомлення про помилку.
             print("Неправильно введений індекс")
 
     # Метод, який видаляє існуючу нотатку за її індексом у списку.
@@ -64,7 +60,6 @@ class Notebook:
 
         # Перевіряємо, чи є такий індекс у списку нотаток.
         if 0 <= index < len(self.notes):
-
             self.notes.pop(index)  # Видаляємо нотатку за індексом.
             print("Нотатку видалено")
 
@@ -111,7 +106,7 @@ class Notebook:
     def save_to_file(self, filename=None):
         '''
           |============================
-          | Залишаю filename і його обробку у цьому методі, для можливості 
+          | Залишаю filename і його обробку у цьому методі, для можливості
           | розширення. Наприклад, для збереження нотаток вручну.
           |============================
         '''

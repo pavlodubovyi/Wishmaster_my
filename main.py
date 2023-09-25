@@ -3,7 +3,6 @@ from sorting.sorting import main as sorting_main
 from notes.wrap import main as notes_main
 
 
-
 def main():
     while True:
         print("-" * 20)

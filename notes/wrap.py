@@ -1,4 +1,4 @@
-from .note import Notebook
+from .note_SOLID import Notebook, Note
 import os
 
 
@@ -43,7 +43,7 @@ def main():
 
         choice = input("Ваш вибір: ")
 
-        if choice == "1":
+        if choice == "1" and choice != "10":
 
             # Додаємо пропозицію повернутися у цикл вибору
             result = input("Продовжити (y) чи повернутися у меню вибору (n)? ")
@@ -58,7 +58,8 @@ def main():
                     ",")  # Зчитуємо ключові слова нотатки, розділені комами
                 keywords = [kw.strip(' ')
                             for kw in keywords]  # Видаляємо зайві пробіли
-                notebook.add_note(text, keywords)  # Додаємо нову нотатку
+                new_note = Note(text, keywords)
+                notebook.add_note(new_note)  # Додаємо нову нотатку
                 print("Нотатку додано")
 
         elif choice == "2":
