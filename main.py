@@ -1,4 +1,4 @@
-from phonebook.phonebook import main as phonebook_main
+from phonebook.phonebook_SOLID import main as phonebook_main
 from sorting.sorting import main as sorting_main
 from notes.wrap import main as notes_main
 
@@ -18,7 +18,7 @@ def main():
         choice = input("Виберіть дію: ")
 
         if choice == '1':
-            # Виклик функціональності з phonebook.py
+            # Виклик функціональності з phonebook_SOLID.py
             phonebook_main()
 
         elif choice == '2':

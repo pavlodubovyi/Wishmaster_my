@@ -3,7 +3,7 @@ import re
 import json
 from datetime import datetime, timedelta, date
 
-class Contact(ABC):
+class Contact:
     def __init__(self, name, phone, birthday, email):
         self.name = name
         self.phone = phone
