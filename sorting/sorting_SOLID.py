@@ -2,11 +2,11 @@ import os
 import re
 import shutil
 from pathlib import Path
+frim abc import ABC, abstractmethod
 
 
-class FileOrganizer:
+def FileOrganizer(ABC):
     def __init__(self, folder):
-    
         self.folder = folder
         self.directories = ['images', 'videos', 'documents', 'audio', 'archives', 'other']
         self.new_folders = {directory: list() for directory in self.directories}
@@ -29,6 +29,25 @@ class FileOrganizer:
             1102: 'yu', 1070: 'YU', 1103: 'ya', 1071: 'YA', 1108: 'je', 1028: 'JE', 1110: 'i', 1030: 'I', 1111: 'ji',
             1031: 'JI', 1169: 'g', 1168: 'G'
         }
+
+    @abstractmethod
+    def normalize(self, filename):
+        pass
+
+    @abstractmethod
+    def sort_files(self):
+        pass
+
+    @abstractmethod
+    def create_directories(self, folders):
+        pass
+
+    @abstractmethod
+    def delete_empty(self):
+        pass
+
+
+class TheFileOrganizer(FileOrganizer):
 
     def normalize(self, filename):
         file = filename.name
