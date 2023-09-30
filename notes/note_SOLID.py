@@ -3,6 +3,7 @@ import os.path
 import pickle
 from abc import ABC, abstractmethod
 
+
 class AbstractNote(ABC):
 
     def __init__(self, text='', keywords=None):
@@ -17,6 +18,7 @@ class AbstractNote(ABC):
     @abstractmethod
     def get_keywords(self):
         pass
+
 
 class Note(AbstractNote):
     def __str__(self):
@@ -150,7 +152,6 @@ class Notebook:
     def load_from_file(self, filename):
 
         with open(filename, "rb") as file:
-
             old_notebook = pickle.load(file)
             for note in old_notebook.notes:
                 print(note)
@@ -159,7 +160,7 @@ class Notebook:
     def print_notes(self):
 
         for i, note in enumerate(self.notes):
-            print(f"{i+1}. {note}")
+            print(f"{i + 1}. {note}")
 
     def show_saved_files(self):
 
@@ -171,7 +172,6 @@ class Notebook:
         for element in os.listdir(directory):
             # якщо елемент є файлом і має потрібне розширення
             if os.path.isfile(os.path.join(directory, element)) and element.endswith(extension):
-
                 # додаємо ім'я файлу до списку
                 files.append(element)
 

@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "wishmaster-my"
+version = "0.1.0"
+description = "Copy of CLI-assistant bot made by our team on Python core course"
+authors = ["pavlodubovyi <133531274+pavlodubovyi@users.noreply.github.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
