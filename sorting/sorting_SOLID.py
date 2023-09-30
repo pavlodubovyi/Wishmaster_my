@@ -2,7 +2,7 @@ import os
 import re
 import shutil
 from pathlib import Path
-frim abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 
 
 def FileOrganizer(ABC):
