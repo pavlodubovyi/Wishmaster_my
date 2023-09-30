@@ -5,7 +5,7 @@ from pathlib import Path
 from abc import ABC, abstractmethod
 
 
-def FileOrganizer(ABC):
+class FileOrganizer(ABC):
     def __init__(self, folder):
         self.folder = folder
         self.directories = ['images', 'videos', 'documents', 'audio', 'archives', 'other']
